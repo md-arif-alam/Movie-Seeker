@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React ,{useState}from 'react';
+import AppContainer from './AppContainer';
+import sty from './App.module.css'
+import AboutMe from './aboutme';
+
+
+//3e0781ff
+
+
+const url = 'https://www.omdbapi.com?apikey=3e0781ff';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+  const[search,setSearch]=useState("");
+  const[movies,setMovies]=useState([]);  // movies contains the array of movie which fetched by api through the help of steMovies method
+  const[aboutMe,setAbout]=useState(false);
+  
+  const movieSearch = async (title)=>{
+    const responcefromAPi = await fetch(`${url}&s=${title}`);
+    const dataFromApi = await responcefromAPi.json();
+    // console.log(dataFromApi.Search);
+     setMovies(dataFromApi.Search);
+  };
+  
+
+  return(
+    <>
+    <button onClick={()=>setAbout(true)} className={sty.btn}>Info</button> 
+      {aboutMe !== false ? (
+        <div>
+           {<AboutMe/>}
+         </div>
+      ):(
+        <div>
+          {
+            <AppContainer movies={movies} search={search} setSearch={setSearch} movieSearch={movieSearch}/>
+         }
+        </div> 
+      ) 
+      }
+    </>
+  );
+ 
+}
 export default App;
+ 
