@@ -1,5 +1,5 @@
 # Movie-Seeker
-It is a website which developed using React a javascript library which using an API for data fetching from server, a user can get the full movie list according to his search.
+It is a website which developed using React (javascript library) which using an API for data fetching from server, a user can get the full movie list according to his search.
 
 Link of the Project :- https://movie-seeker-aa.netlify.app/
 
